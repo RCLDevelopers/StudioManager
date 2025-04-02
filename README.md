@@ -1,7 +1,5 @@
-<a name="readme-top"></a>
+# Zangtics Digital Studio Manager
 
-<!-- PROJECT LOGO -->
-<br />
 <div align="left" >
 <center>
       <a href="https://www.zangticsdigital.com" align="center">
@@ -9,111 +7,106 @@
       </a>    
 </center>
 <center>
-       <h1 style="display: inline-block; margin-left: 10px;">Zangtics Digital Studio Manager</h1>
+       <h1 style="display: inline-block; margin-left: 10px;">Studio Manager</h1>
 </center>
 </div>
-<br />
 
-<br />
-<br />
-<!-- TABLE OF CONTENTS -->
-<details  align="left">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>    
-    <li><a href="#features">Key Features</a></li>
-    <li><a href="#license">License</a></li>    
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-<br />
-<br />
-
-## About The Project
-
-Zangtics Digital Studio Manager is a comprehensive software solution designed to streamline and enhance the management of digital media production workflows. As a leading IT and Film Production company in Kenya, we've developed this platform to meet the unique needs of creative studios, offering powerful tools for project management, resource allocation, and client collaboration.
+A comprehensive studio management solution designed for modern production environments. Our platform streamlines operations for TV, radio, photo, and video studios while providing powerful tools for resource management and client engagement.
 
 [![Studio Manager Dashboard][product-screenshot]](https://www.zangticsdigital.com)
 
-### Key Features:
-- Project Management & Tracking
-- Resource Scheduling
-- Client Portal
-- Digital Asset Management
-- Invoicing & Billing
-- Team Collaboration Tools
-- Reporting & Analytics
+## 📋 Table of Contents
+- [About](#about)
+- [Core Features](#core-features)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+- [Contact](#contact)
+- [License](#license)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## 🎯 About
 
-### Built With
+Zangtics Digital Studio Manager is an all-in-one solution for managing digital media production workflows. Built by industry professionals for industry professionals, it combines powerful booking capabilities, resource management, and project tracking tools in one intuitive platform.
 
-Our Studio Manager is built using cutting-edge technologies to ensure reliability, scalability, and optimal performance:
+## 🚀 Core Features
 
-[![React][React.js]][React-url]
-[![Material][Material]][React-url]
-![E-Chart][Apache-chart]
+### 📱 Client Booking & Management
+- **Website Booking Portal**
+  - Studio showcase with detailed descriptions and photos
+  - Comprehensive service catalog
+  - Real-time availability calendar
+  - Online booking system with payment integration
+  - Automated booking confirmations
+- **QR Code Integration**
+  - Quick access to booking pages
+  - Mobile-friendly interface
+- **Client Management**
+  - Secure client database
+  - Booking history tracking
+  - Client preferences management
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### 🎥 Studio & Equipment Management
+- **Studio Inventory**
+  - Detailed studio specifications
+  - Equipment tracking
+  - Maintenance scheduling
+- **Equipment Management**
+  - Comprehensive equipment catalog
+  - Borrowing system
+  - Maintenance tracking
+  - Condition monitoring
 
-## Getting Started
+### 📅 Task & Calendar Management
+- **Unified Calendar System**
+  - Multi-view calendar (daily/weekly/monthly)
+  - Resource allocation tracking
+  - Booking integration
+- **Task Management**
+  - Project task creation and assignment
+  - Progress tracking
+  - Priority management
+  - Resource conflict detection
 
-### Prerequisites
+### 🔔 Smart Notifications
+- Booking confirmations
+- Task assignments and updates
+- Equipment return reminders
+- Payment notifications
+- Customizable notification preferences
 
-Before you begin, ensure you have met the following requirements:
+### 👥 Multi-User Platform
+- Role-based access control
+- Secure authentication
+- Activity logging
+- Team collaboration tools
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- npm or yarn package manager
-- Modern web browser
+### 💳 Payment Integration
+- M-Pesa integration
+- PayPal support
+- Paystack integration
+- Payment tracking
+- Financial reporting
 
-### Installation
+### 📊 Advanced Features
+- **Project Management**
+  - Project timeline tracking
+  - Task dependencies
+  - Team collaboration
+- **Financial Tools**
+  - Quotation generation
+  - Invoice management
+  - Revenue tracking
+- **Analytics & Reporting**
+  - Custom report generation
+  - Data visualization
+  - Performance metrics
+- **Document Management**
+  - Centralized storage
+  - Document linking
+  - Version control
 
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/zangtics/studio-manager.git
-   ```
-2. **Navigate to the project directory**
-   ```sh
-   cd studio-manager
-   ```
-3. **Install dependencies**
-   ```sh
-   npm install
-   ```
-4. **Start the development server**
-   ```sh
-   npm run dev
-   ```
-   Access the application at http://localhost:3000
+## 💻 Technology Stack
 
-## Contact
-
-Zangtics Digital - [Website](https://www.zangticsdigital.com)
-- 📍 Located in Nairobi, KENYA
-- 📱 Phone: +254 700 579 704
-- ⏰ Working Hours: 08:00am - 11:00pm (Mon-Thu)
-- ✉️ Email: info@zangticsdigital.com
-- 💻 GitHub: [@RCLDevelopers](https://github.com/RCLDevelopers)
-
-Project Link: [https://github.com/RCLDevelopers/studio-manager](https://github.com/RCLDevelopers/studio-manager)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Tech Stack
-
-Our development team utilizes a comprehensive stack of modern technologies:
+Our platform is built using modern, reliable technologies:
 
 [![TypeScript][TypeScript]][TypeScript-url]
 [![React][React.js]][React-url]
@@ -124,13 +117,46 @@ Our development team utilizes a comprehensive stack of modern technologies:
 [![Laravel][Laravel]][Laravel-url]
 [![MySQL][MySQL]][MySQL-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## 🚀 Getting Started
 
-## License
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn package manager
+- Modern web browser
+
+### Installation
+1. Clone the repository
+   ```sh
+   git clone https://github.com/RCLDevelopers/studio-manager.git
+   ```
+2. Navigate to project directory
+   ```sh
+   cd studio-manager
+   ```
+3. Install dependencies
+   ```sh
+   npm install
+   ```
+4. Start development server
+   ```sh
+   npm run dev
+   ```
+   Access at http://localhost:3000
+
+## 📞 Contact
+
+Zangtics Digital - [Website](https://www.zangticsdigital.com)
+- 📍 Located in Nairobi, KENYA
+- 📱 Phone: +254 700 579 704
+- ⏰ Working Hours: 08:00am - 11:00pm (Mon-Thu)
+- ✉️ Email: info@zangticsdigital.com
+- 💻 GitHub: [@RCLDevelopers](https://github.com/RCLDevelopers)
+
+Project Link: [https://github.com/RCLDevelopers/studio-manager](https://github.com/RCLDevelopers/studio-manager)
+
+## 📄 License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
