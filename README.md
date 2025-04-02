@@ -13,6 +13,9 @@
 
 A comprehensive studio management solution designed for modern production environments. Our platform streamlines operations for TV, radio, photo, and video studios while providing powerful tools for resource management and client engagement.
 
+## 📸 Homepage Preview
+![Homepage Preview](public/homepage.png)
+
 ## 🚀 Features
 
 ### 🎨 Frontend Features
@@ -85,7 +88,7 @@ A comprehensive studio management solution designed for modern production enviro
    ```bash
    npm run dev
    ```
-   Access at http://localhost:5173
+   Access at http://localhost:3000/elegent
 
 ### Backend Setup
 1. Create and activate a virtual environment:
