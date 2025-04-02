@@ -13,6 +13,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     /* Linting */
     "strict": true,
@@ -20,9 +22,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "useUnknownInCatchVariables": false,
+
+    /* Paths */
+    "baseUrl": ".",
     "paths": {
-      "*": ["./src/*"]
-    }
+      "@/*": ["src/*"]
+    },
+
+    /* Type Declarations */
+    "types": ["node", "react", "react-dom", "vite/client"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

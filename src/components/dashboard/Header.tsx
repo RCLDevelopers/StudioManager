@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Avatar,
@@ -28,7 +28,20 @@ interface HeaderProps {
   onToggleSidebar: () => void;
 }
 
-export default function Header({ onToggleSidebar }: HeaderProps) {
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+}
+
+const notifications: Notification[] = [
+  { id: 1, title: 'New booking', message: 'Studio A booked for tomorrow', time: '5 min ago' },
+  { id: 2, title: 'Payment received', message: 'Payment of $250 confirmed', time: '1 hour ago' },
+  { id: 3, title: 'Equipment overdue', message: 'Camera kit #3 return is overdue', time: '3 hours ago' },
+];
+
+const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null);
   const [notificationsAnchor, setNotificationsAnchor] = useState<null | HTMLElement>(null);
   
@@ -47,13 +60,6 @@ export default function Header({ onToggleSidebar }: HeaderProps) {
   const handleNotificationsClose = () => {
     setNotificationsAnchor(null);
   };
-
-  // Sample notifications
-  const notifications = [
-    { id: 1, title: 'New booking', message: 'Studio A booked for tomorrow', time: '5 min ago' },
-    { id: 2, title: 'Payment received', message: 'Payment of $250 confirmed', time: '1 hour ago' },
-    { id: 3, title: 'Equipment overdue', message: 'Camera kit #3 return is overdue', time: '3 hours ago' },
-  ];
 
   return (
     <AppBar
@@ -227,4 +233,6 @@ export default function Header({ onToggleSidebar }: HeaderProps) {
       </Menu>
     </AppBar>
   );
-}
+};
+
+export default Header;

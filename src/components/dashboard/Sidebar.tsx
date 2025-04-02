@@ -1,3 +1,4 @@
+import React from 'react';
 import { Drawer, List, Box, Divider, Typography, ListItemButton, ListItemIcon, ListItemText, Avatar } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
@@ -16,68 +17,74 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const Sidebar = ({ open, onClose }: SidebarProps) => {
-  const navItems = [
-    { 
-      title: 'Dashboard', 
-      path: '/', 
-      icon: <DashboardIcon /> 
-    },
-    { 
-      title: 'Studios', 
-      path: '/studios', 
-      icon: <WeekendIcon /> 
-    },
-    { 
-      title: 'Bookings', 
-      path: '/bookings', 
-      icon: <CalendarMonthIcon /> 
-    },
-    { 
-      title: 'Clients', 
-      path: '/clients', 
-      icon: <PeopleIcon /> 
-    },
-    { 
-      title: 'Equipment', 
-      path: '/equipment', 
-      icon: <InventoryIcon /> 
-    },
-    { 
-      title: 'Payments', 
-      path: '/payments', 
-      icon: <PaymentIcon /> 
-    },
-    { 
-      title: 'Invoices', 
-      path: '/invoices', 
-      icon: <ReceiptIcon /> 
-    },
-    { 
-      title: 'Reports', 
-      path: '/reports', 
-      icon: <BarChartIcon /> 
-    },
-  ];
+interface NavItem {
+  title: string;
+  path: string;
+  icon: React.ReactNode;
+}
 
-  const accountItems = [
-    { 
-      title: 'Profile', 
-      path: '/profile', 
-      icon: <PersonIcon /> 
-    },
-    { 
-      title: 'Settings', 
-      path: '/settings', 
-      icon: <SettingsIcon /> 
-    },
-    { 
-      title: 'Logout', 
-      path: '/logout', 
-      icon: <LogoutIcon /> 
-    },
-  ];
+const navItems: NavItem[] = [
+  { 
+    title: 'Dashboard', 
+    path: '/', 
+    icon: <DashboardIcon /> 
+  },
+  { 
+    title: 'Studios', 
+    path: '/studios', 
+    icon: <WeekendIcon /> 
+  },
+  { 
+    title: 'Bookings', 
+    path: '/bookings', 
+    icon: <CalendarMonthIcon /> 
+  },
+  { 
+    title: 'Clients', 
+    path: '/clients', 
+    icon: <PeopleIcon /> 
+  },
+  { 
+    title: 'Equipment', 
+    path: '/equipment', 
+    icon: <InventoryIcon /> 
+  },
+  { 
+    title: 'Payments', 
+    path: '/payments', 
+    icon: <PaymentIcon /> 
+  },
+  { 
+    title: 'Invoices', 
+    path: '/invoices', 
+    icon: <ReceiptIcon /> 
+  },
+  { 
+    title: 'Reports', 
+    path: '/reports', 
+    icon: <BarChartIcon /> 
+  },
+];
 
+const accountItems: NavItem[] = [
+  { 
+    title: 'Profile', 
+    path: '/profile', 
+    icon: <PersonIcon /> 
+  },
+  { 
+    title: 'Settings', 
+    path: '/settings', 
+    icon: <SettingsIcon /> 
+  },
+  { 
+    title: 'Logout', 
+    path: '/logout', 
+    icon: <LogoutIcon /> 
+  },
+];
+
+const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   return (
     <Drawer
       open={open}
