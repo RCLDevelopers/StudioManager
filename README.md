@@ -2,15 +2,14 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<!-- PROJECT LOGO -->
 <div align="left" >
 <center>
-      <a href="public/elegent-logo.png" align="center">
-        <img src="public/elegent-logo.png" alt="Logo" width="50" height="50">
+      <a href="https://www.zangticsdigital.com" align="center">
+        <img src="public/zangtics-logo.png" alt="Zangtics Digital Logo" width="50" height="50">
       </a>    
 </center>
 <center>
-       <h1 style="display: inline-block; margin-left: 10px;">Elegent Admin Dashboard</h1>
+       <h1 style="display: inline-block; margin-left: 10px;">Zangtics Digital Studio Manager</h1>
 </center>
 </div>
 <br />
@@ -34,21 +33,32 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>    
+    <li><a href="#features">Key Features</a></li>
     <li><a href="#license">License</a></li>    
-    <li><a href="#license">Acknowledgments</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 <br />
 <br />
-<!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](public/homepage.png)
+Zangtics Digital Studio Manager is a comprehensive software solution designed to streamline and enhance the management of digital media production workflows. As a leading IT and Film Production company in Kenya, we've developed this platform to meet the unique needs of creative studios, offering powerful tools for project management, resource allocation, and client collaboration.
+
+### Key Features:
+- Project Management & Tracking
+- Resource Scheduling
+- Client Portal
+- Digital Asset Management
+- Invoicing & Billing
+- Team Collaboration Tools
+- Reporting & Analytics
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### <h3>Built With :</h3>
+### Built With
+
+Our Studio Manager is built using cutting-edge technologies to ensure reliability, scalability, and optimal performance:
 
 [![React][React.js]][React-url]
 [![Material][Material]][React-url]
@@ -56,28 +66,25 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-
 ## Getting Started
 
 ### Prerequisites
 
-Before you begin, ensure you have met the following prerequisites:
+Before you begin, ensure you have met the following requirements:
 
-- [Node.js](https://nodejs.org/) installed on your local machine
-- npm or yarn package manager installed with Node.js
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- npm or yarn package manager
+- Modern web browser
 
 ### Installation
 
-Follow these steps to get your project up and running:
-
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/themewagon/elegent.git
+   git clone https://github.com/zangtics/studio-manager.git
    ```
 2. **Navigate to the project directory**
    ```sh
-   cd elegent
+   cd studio-manager
    ```
 3. **Install dependencies**
    ```sh
@@ -87,11 +94,19 @@ Follow these steps to get your project up and running:
    ```sh
    npm run dev
    ```
-   Open your web browser and navigate to http://localhost:3000/elegent to view this application.
+   Access the application at http://localhost:3000
+
+## Contact
+
+Zangtics Digital - [Website](https://www.zangticsdigital.com)
+- 📍 Located in Nairobi, KENYA
+- 📱 Phone: +254 700 579 704
+- ⏰ Working Hours: 08:00am - 11:00pm (Mon-Thu)
+- ✉️ Email: info@zangticsdigital.com
+
+Project Link: [https://github.com/zangtics/studio-manager](https://github.com/zangtics/studio-manager)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
 
 ## License
 
@@ -99,41 +114,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<a name="readme-top">
-<div align="">
-<a align="center" href="https://github.com/themewagon/elegent/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=themewagon/elegent" /><br />
-</a></a></div>
-
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: public/homepage.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
 [Material]: https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white
 [Apache-chart]: https://img.shields.io/badge/echart-4.7.0-green
