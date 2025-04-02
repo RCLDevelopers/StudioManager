@@ -57,11 +57,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           maxWidth={false}
           sx={{ 
             flexGrow: 1,
-            p: { xs: 2, sm: 3 },
-            pt: { xs: 9, sm: 10 },
-            pb: { xs: 4, sm: 5 },
+            p: { xs: 1, sm: 2, md: 3 },
+            pt: { xs: 8, sm: 9, md: 10 },
+            pb: { xs: 3, sm: 4, md: 5 },
             overflow: 'auto',
             height: '100vh',
+            maxWidth: '100vw',
             '&::-webkit-scrollbar': {
               width: '8px',
               height: '8px',

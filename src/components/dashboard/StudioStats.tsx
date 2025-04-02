@@ -26,31 +26,79 @@ const StatCard: React.FC<StatCardProps> = ({ icon, title, value, change, color }
         }
       }}
     >
-      <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+      <CardContent sx={{ 
+        p: { xs: 1.5, sm: 2, md: 3 },
+        '&:last-child': { pb: { xs: 1.5, sm: 2, md: 3 } }
+      }}>
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'flex-start', 
+          gap: { xs: 1, sm: 1.5, md: 2 },
+          flexDirection: { xs: 'column', sm: 'row' },
+          '@media (max-width: 350px)': {
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center'
+          }
+        }}>
           <Box
             sx={{
               backgroundColor: color,
-              borderRadius: 2,
-              p: 1.5,
+              borderRadius: { xs: 1.5, sm: 2 },
+              p: { xs: 1, sm: 1.5 },
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               boxShadow: `0 4px 12px ${color}40`,
+              minWidth: { xs: '40px', sm: '48px' },
+              minHeight: { xs: '40px', sm: '48px' }
             }}
           >
             {icon}
           </Box>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+          <Box sx={{ 
+            flexGrow: 1,
+            width: { xs: '100%', sm: 'auto' }
+          }}>
+            <Typography 
+              variant="subtitle2" 
+              color="text.secondary" 
+              gutterBottom
+              sx={{
+                fontSize: { xs: '0.75rem', sm: '0.875rem' }
+              }}
+            >
               {title}
             </Typography>
-            <Typography variant="h4" component="div" sx={{ mb: 1, fontWeight: 600 }}>
+            <Typography 
+              variant="h4" 
+              component="div" 
+              sx={{ 
+                mb: 1, 
+                fontWeight: 600,
+                fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' }
+              }}
+            >
               {value}
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <TrendingUpIcon sx={{ color: 'success.main', fontSize: '1rem' }} />
-              <Typography variant="caption" color="success.main" sx={{ fontWeight: 500 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 0.5,
+              justifyContent: { xs: 'center', sm: 'flex-start' }
+            }}>
+              <TrendingUpIcon sx={{ 
+                color: 'success.main', 
+                fontSize: { xs: '0.875rem', sm: '1rem' }
+              }} />
+              <Typography 
+                variant="caption" 
+                color="success.main" 
+                sx={{ 
+                  fontWeight: 500,
+                  fontSize: { xs: '0.7rem', sm: '0.75rem' }
+                }}
+              >
                 {change}
               </Typography>
             </Box>
