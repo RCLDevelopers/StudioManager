@@ -41,6 +41,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -51,13 +52,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
-    'django_mongoengine',
     
     # Local apps
-    'apps.accounts.apps.AccountsConfig',
-    'apps.studios.apps.StudiosConfig',
-    'apps.bookings.apps.BookingsConfig',
-    'apps.payments.apps.PaymentsConfig',
+    'apps.accounts',
+    'apps.studios',
+    'apps.bookings',
+    'apps.payments',
 ]
 
 MIDDLEWARE = [
@@ -99,35 +99,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# MongoDB settings
-MONGODB_NAME = 'studio_manager'
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
-MONGODB_USERNAME = ''  # Set in production
-MONGODB_PASSWORD = ''  # Set in production
-
-# Connect to MongoDB
-MONGODB_DATABASES = {
-    'default': {
-        'name': MONGODB_NAME,
-        'host': MONGODB_HOST,
-        'port': MONGODB_PORT,
-        'username': MONGODB_USERNAME,
-        'password': MONGODB_PASSWORD,
-    }
-}
-
 # Authentication settings
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+AUTH_USER_MODEL = 'accounts.User'  # Using our custom User model
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'apps.accounts.auth.MongoAuthBackend',
 ]
 
-# We still need a dummy database for Django's internal operations
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# Database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'studio_manager',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'localhost',
+            'port': 27017,
+            'username': '',  # Set in production
+            'password': '',  # Set in production
+        }
     }
 }
 
@@ -192,14 +184,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
 }
 
 # JWT settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
-
-# Custom user model
-AUTH_USER_MODEL = 'accounts.User'

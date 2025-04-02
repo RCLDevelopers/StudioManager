@@ -1,75 +1,47 @@
-from mongoengine import Document, StringField, BooleanField, DateTimeField, DateField, EmailField
-import bcrypt
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db import models
+from django.utils import timezone
 
-class User(Document):
-    """
-    Custom user model for Studio Manager application.
-    """
-    # Authentication fields
-    username = StringField(max_length=150, required=True, unique=True)
-    email = EmailField(required=True, unique=True)
-    password = StringField(max_length=128)
-    first_name = StringField(max_length=150)
-    last_name = StringField(max_length=150)
-    is_staff = BooleanField(default=False)
-    is_active = BooleanField(default=True)
-    is_superuser = BooleanField(default=False)
-    last_login = DateTimeField(null=True)
-    date_joined = DateTimeField()
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    
     # Additional fields
-    phone_number = StringField(max_length=15)
-    profile_picture = StringField()  # Store the path to the image
-    is_studio_owner = BooleanField(default=False)
-    is_staff_member = BooleanField(default=False)
-    date_of_birth = DateField()
-    address = StringField()
-    bio = StringField()
-    created_at = DateTimeField()
-    updated_at = DateTimeField()
+    phone_number = models.CharField(max_length=15, blank=True)
+    address = models.TextField(blank=True)
 
-    meta = {
-        'collection': 'users',
-        'indexes': ['email', 'username']
-    }
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        app_label = 'accounts'
+
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}".strip()
+
+    def get_short_name(self):
+        return self.first_name
 
     def __str__(self):
         return self.email
-
-    def get_full_name(self):
-        """Return the first_name plus the last_name, with a space in between."""
-        full_name = f"{self.first_name} {self.last_name}"
-        return full_name.strip()
-
-    def get_short_name(self):
-        """Return the short name for the user."""
-        return self.first_name
-
-    def set_password(self, raw_password):
-        """Sets the user's password."""
-        salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(raw_password.encode(), salt)
-        self.password = hashed.decode()
-        self.save()
-
-    def check_password(self, raw_password):
-        """Checks if the provided password matches the stored hash."""
-        return bcrypt.checkpw(raw_password.encode(), self.password.encode())
-
-    def has_perm(self, perm, obj=None):
-        """Does the user have a specific permission?"""
-        return True if self.is_superuser else False
-
-    def has_module_perms(self, app_label):
-        """Does the user have permissions to view the app `app_label`?"""
-        return True if self.is_superuser else False
-
-    @property
-    def is_anonymous(self):
-        """Always returns False. This is a way of comparing User objects to anonymous users."""
-        return False
-
-    @property
-    def is_authenticated(self):
-        """Always returns True. This is a way of telling if the user has been authenticated."""
-        return True
