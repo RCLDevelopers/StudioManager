@@ -1,16 +1,14 @@
-import React from 'react';
-import { Drawer, List, Box, Divider, Typography, ListItemButton, ListItemIcon, ListItemText, Avatar } from '@mui/material';
+import React, { useState } from 'react';
+import { Drawer, List, Box, Typography, ListItemButton, ListItemIcon, ListItemText, Avatar, useTheme } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import WeekendIcon from '@mui/icons-material/Weekend';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PaymentIcon from '@mui/icons-material/Payment';
-import SettingsIcon from '@mui/icons-material/Settings';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LogoutIcon from '@mui/icons-material/Logout';
-import PersonIcon from '@mui/icons-material/Person';
 
 interface SidebarProps {
   open: boolean;
@@ -24,67 +22,20 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { 
-    title: 'Dashboard', 
-    path: '/', 
-    icon: <DashboardIcon /> 
-  },
-  { 
-    title: 'Studios', 
-    path: '/studios', 
-    icon: <WeekendIcon /> 
-  },
-  { 
-    title: 'Bookings', 
-    path: '/bookings', 
-    icon: <CalendarMonthIcon /> 
-  },
-  { 
-    title: 'Clients', 
-    path: '/clients', 
-    icon: <PeopleIcon /> 
-  },
-  { 
-    title: 'Equipment', 
-    path: '/equipment', 
-    icon: <InventoryIcon /> 
-  },
-  { 
-    title: 'Payments', 
-    path: '/payments', 
-    icon: <PaymentIcon /> 
-  },
-  { 
-    title: 'Invoices', 
-    path: '/invoices', 
-    icon: <ReceiptIcon /> 
-  },
-  { 
-    title: 'Reports', 
-    path: '/reports', 
-    icon: <BarChartIcon /> 
-  },
-];
-
-const accountItems: NavItem[] = [
-  { 
-    title: 'Profile', 
-    path: '/profile', 
-    icon: <PersonIcon /> 
-  },
-  { 
-    title: 'Settings', 
-    path: '/settings', 
-    icon: <SettingsIcon /> 
-  },
-  { 
-    title: 'Logout', 
-    path: '/logout', 
-    icon: <LogoutIcon /> 
-  },
+  { title: 'Dashboard', path: '/', icon: <DashboardIcon /> },
+  { title: 'Studios', path: '/studios', icon: <WeekendIcon /> },
+  { title: 'Bookings', path: '/bookings', icon: <CalendarMonthIcon /> },
+  { title: 'Clients', path: '/clients', icon: <PeopleIcon /> },
+  { title: 'Equipment', path: '/equipment', icon: <InventoryIcon /> },
+  { title: 'Payments', path: '/payments', icon: <PaymentIcon /> },
+  { title: 'Invoices', path: '/invoices', icon: <ReceiptIcon /> },
+  { title: 'Reports', path: '/reports', icon: <BarChartIcon /> },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
+  const theme = useTheme();
+  const [activeItem, setActiveItem] = useState('Dashboard');
+
   return (
     <Drawer
       open={open}
@@ -95,63 +46,78 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         '& .MuiDrawer-paper': {
           width: 240,
           boxSizing: 'border-box',
+          bgcolor: '#FFF8F6',
+          borderRight: 'none',
         },
       }}
       variant="persistent"
     >
-      <Box sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Avatar src="/public/zangtics-logo.png" sx={{ width: 40, height: 40 }} />
-        <Typography variant="h6" noWrap component="div">
+      <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Avatar src="/zangtics-logo.png" sx={{ width: 40, height: 40 }} />
+        <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
           Studio Manager
         </Typography>
       </Box>
       
-      <Divider />
-      
-      <Box sx={{ py: 2, overflow: 'auto' }}>
+      <Box sx={{ px: 2, py: 1, overflow: 'auto' }}>
         <List>
           {navItems.map((item) => (
             <ListItemButton
               key={item.title}
+              onClick={() => setActiveItem(item.title)}
               sx={{
-                py: 1,
-                minHeight: 48,
-                px: 2.5,
+                py: 1.5,
+                mb: 0.5,
+                borderRadius: 2,
+                color: activeItem === item.title ? '#FF6B00' : '#666',
+                bgcolor: activeItem === item.title ? '#FFF0E6' : 'transparent',
+                '&:hover': {
+                  bgcolor: activeItem === item.title ? '#FFF0E6' : 'rgba(0, 0, 0, 0.04)',
+                },
               }}
             >
-              <ListItemIcon sx={{ minWidth: 0, mr: 2 }}>
+              <ListItemIcon 
+                sx={{ 
+                  minWidth: 0, 
+                  mr: 2,
+                  color: activeItem === item.title ? '#FF6B00' : '#666',
+                }}
+              >
                 {item.icon}
               </ListItemIcon>
               <ListItemText 
                 primary={item.title} 
-                primaryTypographyProps={{ fontSize: 14 }} 
+                primaryTypographyProps={{ 
+                  fontSize: 14,
+                  fontWeight: activeItem === item.title ? 600 : 400,
+                }} 
               />
             </ListItemButton>
           ))}
         </List>
         
-        <Divider sx={{ my: 1 }} />
-        
-        <List>
-          {accountItems.map((item) => (
-            <ListItemButton
-              key={item.title}
-              sx={{
-                py: 1,
-                minHeight: 48,
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 0, mr: 2 }}>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText 
-                primary={item.title} 
-                primaryTypographyProps={{ fontSize: 14 }} 
-              />
-            </ListItemButton>
-          ))}
-        </List>
+        <Box sx={{ mt: 'auto', pt: 2 }}>
+          <ListItemButton
+            sx={{
+              py: 1.5,
+              borderRadius: 2,
+              color: '#666',
+              '&:hover': {
+                bgcolor: 'rgba(0, 0, 0, 0.04)',
+              },
+            }}
+          >
+            <ListItemIcon sx={{ minWidth: 0, mr: 2, color: '#666' }}>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText 
+              primary="Log out" 
+              primaryTypographyProps={{ 
+                fontSize: 14,
+              }} 
+            />
+          </ListItemButton>
+        </Box>
       </Box>
     </Drawer>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme, Container } from '@mui/material';
 import type { Theme } from '@mui/material';
 import type { ReactNode } from 'react';
 import Sidebar from './Sidebar';
@@ -23,7 +23,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       sx={{ 
         display: 'flex', 
         minHeight: '100vh',
-        bgcolor: 'background.default'
+        bgcolor: theme.palette.background.default,
+        overflow: 'hidden'
       }}
     >
       <Sidebar open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
@@ -32,24 +33,50 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         component="main"
         sx={{
           flexGrow: 1,
-          transition: theme.transitions.create('margin', {
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
           marginLeft: 0,
+          width: '100%',
           ...(isSidebarOpen && {
-            transition: theme.transitions.create('margin', {
+            transition: theme.transitions.create(['margin', 'width'], {
               easing: theme.transitions.easing.easeOut,
               duration: theme.transitions.duration.enteringScreen,
             }),
             marginLeft: isMobile ? 0 : '240px',
+            width: isMobile ? '100%' : 'calc(100% - 240px)',
           }),
         }}
       >
         <Header onToggleSidebar={toggleSidebar} />
-        <Box sx={{ p: 3, pt: 10 }}>
+        <Container 
+          maxWidth={false}
+          sx={{ 
+            flexGrow: 1,
+            p: { xs: 2, sm: 3 },
+            pt: { xs: 9, sm: 10 },
+            pb: { xs: 4, sm: 5 },
+            overflow: 'auto',
+            height: '100vh',
+            '&::-webkit-scrollbar': {
+              width: '8px',
+              height: '8px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(0,0,0,0.1)',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-track': {
+              backgroundColor: 'transparent',
+            },
+          }}
+        >
           {children}
-        </Box>
+        </Container>
       </Box>
     </Box>
   );
