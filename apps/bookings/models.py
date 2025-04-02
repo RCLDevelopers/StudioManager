@@ -1,53 +1,39 @@
-from django.db import models
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from apps.studios.models import Room
+from mongoengine import Document, StringField, ReferenceField, DateTimeField, DecimalField, IntField
 
-class Booking(models.Model):
+class Booking(Document):
     """
     Model representing a booking for a studio room.
     """
-    STATUS_CHOICES = [
+    STATUS_CHOICES = (
         ('pending', _('Pending')),
         ('confirmed', _('Confirmed')),
         ('cancelled', _('Cancelled')),
         ('completed', _('Completed')),
-    ]
+    )
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='bookings'
-    )
-    room = models.ForeignKey(
-        Room,
-        on_delete=models.CASCADE,
-        related_name='bookings'
-    )
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='pending'
-    )
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    notes = models.TextField(blank=True)
-    number_of_guests = models.PositiveIntegerField(default=1)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    user = ReferenceField('User', required=True)
+    room = ReferenceField('Room', required=True)
+    start_time = DateTimeField(required=True)
+    end_time = DateTimeField(required=True)
+    status = StringField(choices=STATUS_CHOICES, default='pending')
+    total_price = DecimalField(precision=2)
+    notes = StringField()
+    number_of_guests = IntField(min_value=1, default=1)
+    created_at = DateTimeField()
+    updated_at = DateTimeField()
 
-    class Meta:
-        verbose_name = _('booking')
-        verbose_name_plural = _('bookings')
-        ordering = ['-start_time']
-        # Ensure no overlapping bookings for the same room
-        constraints = [
-            models.CheckConstraint(
-                check=models.Q(end_time__gt=models.F('start_time')),
-                name='check_end_time_after_start_time'
-            )
-        ]
+    meta = {
+        'collection': 'bookings',
+        'indexes': [
+            'user',
+            'room',
+            'start_time',
+            'end_time',
+            'status'
+        ],
+        'ordering': ['-start_time']
+    }
 
     def __str__(self):
         return f"{self.room.studio.name} - {self.room.name} ({self.start_time})"
@@ -60,31 +46,23 @@ class Booking(models.Model):
     def calculate_total_price(self):
         """Calculate the total price based on duration and room rate"""
         duration = self.calculate_duration()
-        return self.room.hourly_rate * duration
+        return float(self.room.hourly_rate) * duration
 
-class BookingStatus(models.Model):
+class BookingStatus(Document):
     """
     Model for tracking booking status changes.
     """
-    booking = models.ForeignKey(
-        Booking,
-        on_delete=models.CASCADE,
-        related_name='status_history'
-    )
-    status = models.CharField(max_length=20, choices=Booking.STATUS_CHOICES)
-    notes = models.TextField(blank=True)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='booking_status_changes'
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
+    booking = ReferenceField(Booking, required=True)
+    status = StringField(choices=Booking.STATUS_CHOICES)
+    notes = StringField()
+    created_by = ReferenceField('User')
+    created_at = DateTimeField()
 
-    class Meta:
-        verbose_name = _('booking status')
-        verbose_name_plural = _('booking statuses')
-        ordering = ['-created_at']
+    meta = {
+        'collection': 'booking_statuses',
+        'indexes': ['booking', 'created_at'],
+        'ordering': ['-created_at']
+    }
 
     def __str__(self):
         return f"{self.booking} - {self.status} ({self.created_at})"

@@ -30,18 +30,17 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-o&=3#g8w@bm6w)27e(6)^@$_ki!p#e)dy(6zdf_jl=n8ofp1a-')
+SECRET_KEY = 'django-insecure-your-secret-key-here'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,12 +51,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'django_mongoengine',
     
     # Local apps
-    'accounts',
-    'studios',
-    'bookings',
-    'payments',
+    'apps.accounts.apps.AccountsConfig',
+    'apps.studios.apps.StudiosConfig',
+    'apps.bookings.apps.BookingsConfig',
+    'apps.payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,8 +72,8 @@ MIDDLEWARE = [
 ]
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Allow all origins in development
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+CORS_ALLOW_ALL_ORIGINS = True  # Change in production
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'core.urls'
 
@@ -100,10 +100,28 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # MongoDB settings
-MONGODB_HOST = os.getenv('MONGODB_URI', 'mongodb://localhost:27017')
-MONGODB_NAME = os.getenv('MONGODB_NAME', 'studio_manager')
+MONGODB_NAME = 'studio_manager'
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+MONGODB_USERNAME = ''  # Set in production
+MONGODB_PASSWORD = ''  # Set in production
 
-connect(MONGODB_NAME, host=MONGODB_HOST)
+# Connect to MongoDB
+MONGODB_DATABASES = {
+    'default': {
+        'name': MONGODB_NAME,
+        'host': MONGODB_HOST,
+        'port': MONGODB_PORT,
+        'username': MONGODB_USERNAME,
+        'password': MONGODB_PASSWORD,
+    }
+}
+
+# Authentication settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # We still need a dummy database for Django's internal operations
 DATABASES = {
@@ -112,7 +130,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -149,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
