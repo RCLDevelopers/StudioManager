@@ -177,3 +177,154 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Laravel-url]: https://laravel.com/
 [MySQL]: https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white
 [MySQL-url]: https://www.mysql.com/
+
+# Studio Manager SaaS
+
+A comprehensive Studio Management System built with Django and MongoDB, designed to help studio owners manage their facilities, bookings, and clients efficiently.
+
+## Features
+
+- **User Management**
+  - User registration and authentication
+  - JWT-based authentication system
+  - User profiles with role-based access control
+  - Password encryption using bcrypt
+
+- **Studio Management**
+  - Studio space management
+  - Equipment inventory
+  - Facility details and amenities
+  - Availability scheduling
+
+- **Booking System**
+  - Real-time availability checking
+  - Booking management
+  - Schedule conflicts prevention
+  - Booking history
+
+- **Payment Processing**
+  - Secure payment processing
+  - Invoice generation
+  - Payment history tracking
+  - Refund management
+
+## Technology Stack
+
+- **Backend**: Django 3.1.12
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+- **API**: Django REST Framework
+- **File Storage**: Django Media Files
+- **Security**: bcrypt password hashing
+
+## Setup Instructions
+
+1. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Configure MongoDB:
+   - Install MongoDB if not already installed
+   - Create a database named 'studiomanager'
+   - Update MongoDB settings in `core/settings.py` if needed
+
+4. Apply migrations:
+   ```bash
+   python manage.py migrate
+   ```
+
+5. Create a superuser:
+   ```bash
+   python manage.py createsuperuser
+   # Use these credentials for testing:
+   # Email: admin@example.com
+   # Password: 12345678
+   ```
+
+6. Run the development server:
+   ```bash
+   python manage.py runserver
+   ```
+
+## API Endpoints
+
+### Base URL: `http://127.0.0.1:8000/`
+
+### Authentication Endpoints
+- **Login**: `POST /api/accounts/token/`
+  - Request body: `{"email": "user@example.com", "password": "userpassword"}`
+  - Returns: Access and refresh tokens
+
+- **Refresh Token**: `POST /api/accounts/token/refresh/`
+  - Request body: `{"refresh": "your-refresh-token"}`
+  - Returns: New access token
+
+- **Register**: `POST /api/accounts/register/`
+  - Request body: `{"email": "user@example.com", "password": "userpassword", "first_name": "John", "last_name": "Doe"}`
+
+### User Management
+- **User Profile**: `GET /api/accounts/profile/`
+  - Requires: Authentication token
+  - Returns: User profile information
+
+### Admin Interface
+- **Admin Panel**: `/admin/`
+  - Requires: Superuser credentials
+  - Manage users, studios, bookings, and payments
+
+## Database Configuration
+
+### MongoDB Settings
+```python
+MONGODB_DATABASES = {
+    'default': {
+        'name': 'studiomanager',
+        'host': 'localhost',
+        'port': 27017,
+    }
+}
+```
+
+## Security Considerations
+
+- JWT tokens are used for API authentication
+- Passwords are hashed using bcrypt
+- CORS is configured for secure cross-origin requests
+- Media files are served through Django's secure file server
+- Environment variables should be used for sensitive data in production
+
+## Production Deployment
+
+For production deployment:
+1. Set `DEBUG = False` in settings
+2. Configure proper MongoDB authentication
+3. Use environment variables for sensitive data
+4. Set up proper CORS configuration
+5. Configure proper static and media file serving
+6. Set up SSL/TLS certificates
+7. Configure proper logging
+
+## Testing
+
+Default superuser credentials for testing:
+- Email: admin@example.com
+- Password: 12345678
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License.
